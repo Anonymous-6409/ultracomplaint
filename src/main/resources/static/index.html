@@ -1,0 +1,1713 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <title>Ultrasoftsys&#039;s Complaint API</title>
+
+    <link rel="stylesheet" href="/css/400.css">
+    <link rel="stylesheet" href="/css/700.css">
+    <link rel="stylesheet" href="/swagger-ui/swagger-ui.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/x-icon" href="/images/logo-header.ico">
+
+
+    <script id="swagger-data" type="application/json">{"url":"/docs?format=json","spec":{
+        "openapi": "3.0.1",
+        "info": {
+            "title": "Ultrasoftsys Complaint API",
+            "description": "We are a pool of Champions comprised of industry-specific experts who offer professional advice, guidance, and actionable solutions to businesses experiencing issues across various departments and processes.",
+            "contact": {
+                "name": "Goutam Kumar Sah",
+                "email": "gautam@vartulz.com"
+            },
+            "license": {
+                "name": "Ultrasoftsys Private Limited",
+                "url": "https://ultrasoftsys.com/"
+            },
+            "version": "1.1"
+        },
+        "servers": [
+            {
+                "url": "http://localhost:7060",
+                "description": "DEV"
+            },
+            {
+                "url": "https://complaints.ultrasoftsys.com",
+                "description": "UAT"
+            }
+        ],
+        "paths": {
+            "/customer/create/complaint": {
+                "post": {
+                    "tags": [
+                        "CUSTOMER CONTROLLER"
+                    ],
+                    "operationId": "createComplain",
+                    "parameters": [
+                        {
+                            "name": "remark",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "file": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/engineer/get/eng/complaint/{complaintId}": {
+                "get": {
+                    "tags": [
+                        "ENGINEER CONTROLLER"
+                    ],
+                    "operationId": "getallComplaintsSingleEng",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "complaintId",
+                            "in": "path",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/customer/get/complaint/{complaintId}": {
+                "get": {
+                    "tags": [
+                        "CUSTOMER CONTROLLER"
+                    ],
+                    "operationId": "getallComplaintSingle",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "complaintId",
+                            "in": "path",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/getall/admin/complaint": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "getallComplaintAdmin",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string",
+                                "enum": [
+                                    "OPEN",
+                                    "ENGINEER_ASSIGNED",
+                                    "IN_PROCESS",
+                                    "CLOSED"
+                                ]
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/asset/getall/bycategory": {
+                "get": {
+                    "tags": [
+                        "ASSET DETAILS CONTROLLER"
+                    ],
+                    "operationId": "getbyCategory",
+                    "parameters": [
+                        {
+                            "name": "categoryId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/create/engineer": {
+                "post": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "createEngineer",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Engineer_Request_Body"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/engineer/reply/complaint": {
+                "post": {
+                    "tags": [
+                        "ENGINEER CONTROLLER"
+                    ],
+                    "operationId": "replyComplain",
+                    "parameters": [
+                        {
+                            "name": "remark",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "complainId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "file": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/customer/reply/complaint": {
+                "post": {
+                    "tags": [
+                        "CUSTOMER CONTROLLER"
+                    ],
+                    "operationId": "replyComplain_1",
+                    "parameters": [
+                        {
+                            "name": "remark",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "complainId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "file": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/create/admin": {
+                "post": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "createNewAdmin",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Admin_Request_Body"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/create/assetstaus": {
+                "post": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "createAssetStatus",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tbl_Asset_Status"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/asset/getall": {
+                "get": {
+                    "tags": [
+                        "ASSET DETAILS CONTROLLER"
+                    ],
+                    "operationId": "getAll",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "body",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "$ref": "#/components/schemas/Asset_Details_Request_Body"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/update/assetstaus": {
+                "put": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "updateAssetStatus",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tbl_Asset_Status"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/getall/customer": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "getallCustomer",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/create/category": {
+                "post": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "createCategory",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tbl_Asset_Category"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/asset/create": {
+                "post": {
+                    "tags": [
+                        "ASSET DETAILS CONTROLLER"
+                    ],
+                    "operationId": "create",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Asset_Details_Request_Body"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/create/assettype": {
+                "post": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "createAssetType",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tbl_Asset_Type"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/asset/getall/byassettype": {
+                "get": {
+                    "tags": [
+                        "ASSET DETAILS CONTROLLER"
+                    ],
+                    "operationId": "getbyType",
+                    "parameters": [
+                        {
+                            "name": "assetType",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/asset/getall/byassetstatus": {
+                "get": {
+                    "tags": [
+                        "ASSET DETAILS CONTROLLER"
+                    ],
+                    "operationId": "getbyStatus",
+                    "parameters": [
+                        {
+                            "name": "assetStatus",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/getall/assettype": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "getAllAssetType",
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/assigntoeng/admin/complaint": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "assignedToEngineer",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "complainId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "engineerId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/block/unblock/{id}": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "getallCustomer_1",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "in": "path",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "role",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string",
+                                "enum": [
+                                    "ADMIN",
+                                    "CUSTOMER",
+                                    "ENGINEER"
+                                ]
+                            }
+                        },
+                        {
+                            "name": "action",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string",
+                                "enum": [
+                                    "ACTIVE",
+                                    "INACTIVE"
+                                ]
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/engineer/close/complaint": {
+                "post": {
+                    "tags": [
+                        "ENGINEER CONTROLLER"
+                    ],
+                    "operationId": "closeComplain",
+                    "parameters": [
+                        {
+                            "name": "complainId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/getall/engineer": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "getallEngneer",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/asset/getall/bycustomer": {
+                "get": {
+                    "tags": [
+                        "ASSET DETAILS CONTROLLER"
+                    ],
+                    "operationId": "getbyCustomer",
+                    "parameters": [
+                        {
+                            "name": "customerId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/close/admin/complaint": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "closeComplaint",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "complainId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/getall/assetstaus": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "getAllAssetStatus",
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/user/logout": {
+                "post": {
+                    "tags": [
+                        "LOGIN/LOGOUT CONTROLLER"
+                    ],
+                    "operationId": "userLogin",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKE",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/customer/getall/complaint": {
+                "get": {
+                    "tags": [
+                        "CUSTOMER CONTROLLER"
+                    ],
+                    "operationId": "getallComplaint",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/getall/admin": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "getallAdmin",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/user/login": {
+                "post": {
+                    "tags": [
+                        "LOGIN/LOGOUT CONTROLLER"
+                    ],
+                    "operationId": "userLogin_1",
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Login_Request_Body"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/create/customer": {
+                "post": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "createCustomer",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Customer_Request_Body"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/count/admin/complaint": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "countComplaint",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string",
+                                "enum": [
+                                    "OPEN",
+                                    "ENGINEER_ASSIGNED",
+                                    "IN_PROCESS",
+                                    "CLOSED"
+                                ]
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/update/category": {
+                "put": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "updateCategory",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tbl_Asset_Category"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/engineer/get/all/complaint": {
+                "get": {
+                    "tags": [
+                        "ENGINEER CONTROLLER"
+                    ],
+                    "operationId": "getallComplaints",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string",
+                                "enum": [
+                                    "OPEN",
+                                    "ENGINEER_ASSIGNED",
+                                    "IN_PROCESS",
+                                    "CLOSED"
+                                ]
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/reply/admin/complaint": {
+                "post": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "replyComplainAdmin",
+                    "parameters": [
+                        {
+                            "name": "remark",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "complainId",
+                            "in": "query",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        },
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "file": {
+                                            "type": "string",
+                                            "format": "binary"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/update/assettype": {
+                "put": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "updateAssetType",
+                    "parameters": [
+                        {
+                            "name": "X-AUTH-TOKEN",
+                            "in": "header",
+                            "required": true,
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    ],
+                    "requestBody": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tbl_Asset_Type"
+                                }
+                            }
+                        }
+                    },
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "/admin/getall/category": {
+                "get": {
+                    "tags": [
+                        "ADMIN CONTROLLER"
+                    ],
+                    "operationId": "getAllCategory",
+                    "responses": {
+                        "200": {
+                            "description": "default response",
+                            "content": {
+                                "*/*": {
+                                    "schema": {
+                                        "$ref": "#/components/schemas/APIResponseBody"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "components": {
+            "schemas": {
+                "APIResponseBody": {
+                    "type": "object",
+                    "properties": {
+                        "status_code": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "message": {
+                            "type": "string"
+                        },
+                        "data": {
+                            "type": "object"
+                        }
+                    }
+                },
+                "Engineer_Request_Body": {
+                    "type": "object",
+                    "properties": {
+                        "engineerEmailId": {
+                            "type": "string"
+                        },
+                        "engineerMobile": {
+                            "type": "string"
+                        },
+                        "engineerName": {
+                            "type": "string"
+                        },
+                        "engineerWorkDiscription": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Admin_Request_Body": {
+                    "type": "object",
+                    "properties": {
+                        "emailId": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "phoneNumber": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Tbl_Asset_Status": {
+                    "type": "object",
+                    "properties": {
+                        "assetStatusId": {
+                            "type": "string"
+                        },
+                        "assetStatusName": {
+                            "type": "string"
+                        },
+                        "createdDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "updatedDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                },
+                "Asset_Details_Request_Body": {
+                    "type": "object",
+                    "properties": {
+                        "assetId": {
+                            "type": "string"
+                        },
+                        "assetCategoryId": {
+                            "type": "string"
+                        },
+                        "assetCategoryName": {
+                            "type": "string"
+                        },
+                        "assetTypeId": {
+                            "type": "string"
+                        },
+                        "assetTypeName": {
+                            "type": "string"
+                        },
+                        "assetDetails": {
+                            "type": "string"
+                        },
+                        "serialNo": {
+                            "type": "string"
+                        },
+                        "assetStatusId": {
+                            "type": "string"
+                        },
+                        "assetStatusName": {
+                            "type": "string"
+                        },
+                        "expiryDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "createdDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "updatedDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "customerId": {
+                            "type": "string"
+                        },
+                        "customerName": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "Tbl_Asset_Category": {
+                    "type": "object",
+                    "properties": {
+                        "assetCategoryId": {
+                            "type": "string"
+                        },
+                        "assetCategoryName": {
+                            "type": "string"
+                        },
+                        "createdDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "updatedDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                },
+                "Tbl_Asset_Type": {
+                    "type": "object",
+                    "properties": {
+                        "assetTypeId": {
+                            "type": "string"
+                        },
+                        "assetTypeName": {
+                            "type": "string"
+                        },
+                        "createdDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        },
+                        "updatedDate": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                },
+                "Login_Request_Body": {
+                    "type": "object",
+                    "properties": {
+                        "username": {
+                            "type": "string"
+                        },
+                        "password": {
+                            "type": "string"
+                        },
+                        "role": {
+                            "type": "string",
+                            "enum": [
+                                "ADMIN",
+                                "CUSTOMER",
+                                "ENGINEER"
+                            ]
+                        }
+                    }
+                },
+                "Customer_Request_Body": {
+                    "type": "object",
+                    "properties": {
+                        "customerMobile": {
+                            "type": "string"
+                        },
+                        "customerName": {
+                            "type": "string"
+                        },
+                        "customerEmail": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },"extraConfiguration":[]}</script>
+</head>
+
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" class="svg-icons">
+    <defs>
+        <symbol viewBox="0 0 20 20" id="unlocked">
+            <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V6h2v-.801C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 20 20" id="locked">
+            <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8zM12 8H8V5.199C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 20 20" id="close">
+            <path d="M14.348 14.849c-.469.469-1.229.469-1.697 0L10 11.819l-2.651 3.029c-.469.469-1.229.469-1.697 0-.469-.469-.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-.469-.469-.469-1.228 0-1.697.469-.469 1.228-.469 1.697 0L10 8.183l2.651-3.031c.469-.469 1.228-.469 1.697 0 .469.469.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c.469.469.469 1.229 0 1.698z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 20 20" id="large-arrow">
+            <path d="M13.25 10L6.109 2.58c-.268-.27-.268-.707 0-.979.268-.27.701-.27.969 0l7.83 7.908c.268.271.268.709 0 .979l-7.83 7.908c-.268.271-.701.27-.969 0-.268-.269-.268-.707 0-.979L13.25 10z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 20 20" id="large-arrow-down">
+            <path d="M17.418 6.109c.272-.268.709-.268.979 0s.271.701 0 .969l-7.908 7.83c-.27.268-.707.268-.979 0l-7.908-7.83c-.27-.268-.27-.701 0-.969.271-.268.709-.268.979 0L10 13.25l7.418-7.141z"></path>
+        </symbol>
+
+
+        <symbol viewBox="0 0 24 24" id="jump-to">
+            <path d="M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z"></path>
+        </symbol>
+
+        <symbol viewBox="0 0 24 24" id="expand">
+            <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"></path>
+        </symbol>
+
+    </defs>
+</svg>
+
+<header>
+    <a id="logo" href="https://ultrasoftsys.com/"><img src="/images/logo-header.jpg" alt="Ultrasoftsys Private Limited."></a>
+</header>
+
+<div class="web"><img src="/images/web.png"></div>
+<div class="webby"><img src="/images/webby.png"></div>
+
+<div id="swagger-ui" class="api-platform"></div>
+
+<div class="swagger-ui" id="formats">
+    <div class="information-container wrapper">
+        <div class="info">
+            Available formats:
+            <a href="/v3/api-docs">JSON</a>
+            <a href="/v3/api-docs.yaml">YAML</a>
+            <br>
+            API docs:
+            <a href="/v3/api-docs">Read API Doc</a>                                </div>
+    </div>
+</div>
+
+<script src="/swagger-ui/swagger-ui-bundle.js"></script>
+<script src="/swagger-ui/swagger-ui-standalone-preset.js"></script>
+<script src="/js/init-swagger-ui.js"></script>
+<script src="/js/init-common-ui.js" defer></script>
+
+</body>
+</html>
